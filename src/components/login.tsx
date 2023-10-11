@@ -1,9 +1,16 @@
 import React,{useState, useEffect, useRef} from 'react'
 import axios from '../api/axios'
 import useAuth from '../hooks/useAuth';
+import {Link, useNavigate, useLocation} from 'react-router-dom';
 
 const Login = () => {
   const {setAuth} = useAuth()
+
+
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || '/';
+
 
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLInputElement>(null);
@@ -12,7 +19,7 @@ const Login = () => {
       const [country, setCountry] = useState("");
       const [password, setPassword] = useState("");
       const [errMsg, setErrMsg] = useState("");
-      const [success, setSuccess] = useState(false);
+
 
       useEffect(()=>{
         userRef.current?.focus()
@@ -37,10 +44,11 @@ const Login = () => {
         const accessToken = res?.data?.accessToken;
         const role = res?.data?.role;
         setAuth({role, accessToken,email,country,})
+         navigate(from, { replace: true });
         setEmail("")
         setCountry("")
         setPassword("")
-        setSuccess(true)
+       
        } catch (error:any) {
         if(!error?.response){
           setErrMsg('Network Error')
@@ -61,10 +69,16 @@ const Login = () => {
 
   return (
     <section className="flex flex-col justify-center items-center h-[100vh]  ">
-       <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+      <p
+        ref={errRef}
+        className={errMsg ? "errmsg" : "offscreen"}
+        aria-live="assertive"
+      >
+        {errMsg}
+      </p>
       <h1 className=" font-bold text-lg">Login to your account</h1>
       <form
-      onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="  w-[45%] p-5 rounded-md xl:w-[20%] h-[30%] flex items-center flex-col pl-[40px] pr-[40px] "
       >
         <div className="flex flex-col m-2 w-full">
@@ -74,15 +88,14 @@ const Login = () => {
           <input
             className="border border-gray-300  h-9 pl-2 rounded-md font-light text-sm  outline-none focus:border-blue-300 focus:ring-4 ring-blue-500/20  transition-all ease-in-out "
             type="email"
+            ref={userRef}
             placeholder="Enter your email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            autoComplete='off'
-
+            autoComplete="off"
           />
-
         </div>
 
         <div className="flex flex-col m-2 w-full">
@@ -90,7 +103,6 @@ const Login = () => {
             Country
           </label>
           <input
-           ref={userRef}
             className="border border-gray-300  h-9 pl-2 rounded-md font-light text-sm  outline-none focus:border-blue-300 focus:ring-4 ring-blue-500/20  transition-all ease-in-out "
             type="text"
             placeholder="Enter your country"
@@ -98,9 +110,8 @@ const Login = () => {
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required
-            autoComplete='off'
+            autoComplete="off"
           />
-
         </div>
 
         <div className="flex flex-col m-2 w-full">
@@ -116,7 +127,6 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-      
         </div>
 
         <button
@@ -128,15 +138,15 @@ const Login = () => {
           Signin
         </button>
         {
-        <p className='text-red-500 text-[0.8rem]'>{
-          !success ?errMsg:null
-          }</p>
+          <p className="text-red-500 text-[0.8rem]">
+            {/* {!success ? errMsg : null} */}
+          </p>
         }
 
         <p className="font-extralight text-md mt-4">
           Don&apos;t have account?{" "}
           <span className="text-blue-700 hover:underline underline-offset-1">
-            SignUp
+            <Link to="/signup">Signup</Link>
           </span>
         </p>
       </form>
