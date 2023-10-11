@@ -22,7 +22,7 @@ function App() {
         {/* Public Routes */}
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
-        <Route path="admim/login" element={<AdminLogin />} />
+        <Route path="admin/login" element={<AdminLogin />} />
         <Route path="unauthorized" element={<Unauthorized/>} />
 
         {/* Protected Routes */}
@@ -41,7 +41,7 @@ function App() {
         </Route> */}
 
         <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />}>
-          <Route path="admin/dashboard" element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} />
         </Route>
 
         {/* <Route element={<RequireAuth allowedRoles={[ROLES.staff]} />}>
