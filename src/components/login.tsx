@@ -34,14 +34,9 @@ const Login = () => {
             'Content-Type': 'application/json'
           }
         })
-
-        // console.log(res.data);
-        // console.log(res.status);
-        // console.log(res.data.accessToken);
-        // console.log(res.data.role);
-        const accessToken = res.data.accessToken;
-        const role = res.data.role;
-        setAuth({role, accessToken})
+        const accessToken = res?.data?.accessToken;
+        const role = res?.data?.role;
+        setAuth({role, accessToken,email,country,})
         setEmail("")
         setCountry("")
         setPassword("")
@@ -49,13 +44,16 @@ const Login = () => {
        } catch (error:any) {
         if(!error?.response){
           setErrMsg('Network Error')
-        }else if(error?.response.status === 401){
+        }else if(error.response?.status === 401){
           setErrMsg('Invalid email or password')
+
+        } else if(error.response?.status === 400){
+          setErrMsg('Unauthorized')
 
         }else{
           setErrMsg('Authentication failed')
         } 
-        
+        errRef.current?.focus()
       }
        }
        
