@@ -43,7 +43,9 @@ const Signup = () => {
       const [success, setSuccess] = useState(false);
 
 
-
+      useEffect(()=>{
+        userRef.current?.focus()
+      },[])
 
     useEffect(() => {
       const result = USER_REGEX.test(name);
@@ -87,16 +89,16 @@ const Signup = () => {
           }
         }
         )
-        console.log(res.data);
-        console.log(res.status);
-        console.log(res.data.accessToken);
-        console.log(res.data.role);
+        // console.log(res.data);
+        // console.log(res.status);
+        // console.log(res.data.accessToken);
+        // console.log(res.data.role);
         
         if(res.status === 201){
           console.log('success');
         }
         setSuccess(true)
-      } catch(error:any) {
+      } catch (error:any) {
         
         if(!error?.response){
           setErrMsg('Network Error')
