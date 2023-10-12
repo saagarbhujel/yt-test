@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
-
+import useAuth from "../hooks/useAuth.tsx";
 const Unauthorized = () => {
+    const { auth } = useAuth();
   const navigate = useNavigate();
 
-  const goBack = () => navigate(-1);
+  const goBack = () =>{
+      !auth.accessToken ? navigate("/login") : navigate(-1)
+  }
 
   return (
     <section>
@@ -13,6 +16,7 @@ const Unauthorized = () => {
       <div className="flexGrow">
         <button onClick={goBack}>Go Back</button>
       </div>
+
     </section>
   );
 };
