@@ -37,6 +37,7 @@ const errRef = useRef<HTMLInputElement>(null);
                password,
              }),
              {
+              withCredentials: true,
                headers: {
                  "Content-Type": "application/json",
                },
@@ -44,7 +45,8 @@ const errRef = useRef<HTMLInputElement>(null);
            );
            const accessToken = res?.data?.accessToken;
            const role = res?.data?.role;
-           setAuth({ role, accessToken, email});
+           const refreshToken = res?.data?.refreshToken;
+           setAuth({ role, accessToken,refreshToken, email});
            console.log(res?.data?.accessToken);
            console.log(role);
            

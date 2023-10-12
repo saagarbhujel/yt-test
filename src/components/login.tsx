@@ -35,13 +35,15 @@ const Login = () => {
           email,
           password,
         }),{
+          withCredentials: true,
           headers: {
             'Content-Type': 'application/json'
           }
         })
         const accessToken = res?.data?.accessToken;
+        const refreshToken = res?.data?.refreshToken;
         const role = res?.data?.role;
-        setAuth({role, accessToken,email})
+        setAuth({role, accessToken,refreshToken,email})
          navigate(from, { replace: true });
         setEmail("")
         setPassword("")
