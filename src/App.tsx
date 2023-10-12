@@ -9,9 +9,9 @@ import Home from "./components/Home";
 import Unauthorized from "./components/Unauthorize";
 
 const ROLES = {
-player: 'player',
-admin: 'admin',
-staff: 'staff',
+'player': 'player',
+'admin': 'admin',
+'staff': 'staff',
 }
 
 function App() {
