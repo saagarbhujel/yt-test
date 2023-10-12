@@ -2,6 +2,7 @@ import React,{useState, useEffect, useRef} from 'react'
 import axios from '../api/axios'
 import useAuth from '../hooks/useAuth';
 import {Link, useNavigate, useLocation} from 'react-router-dom';
+import useLocalStorage from "../hooks/useLocalStorage.tsx";
 
 const Login = () => {
   const {setAuth} = useAuth()
@@ -15,7 +16,7 @@ const Login = () => {
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLInputElement>(null);
 
-      const [email, setEmail] = useState("");
+      const [email, setEmail] = useLocalStorage("email", "")
       const [password, setPassword] = useState("");
       const [errMsg, setErrMsg] = useState("");
 
