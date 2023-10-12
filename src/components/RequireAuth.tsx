@@ -2,10 +2,7 @@ import React from 'react'
 import { useLocation,Navigate, Outlet } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 
-type AuthType = {
-  auth: any
-  role: any; // Define the type of the role property
-};
+
 
 type RequireAuthProps = {
   allowedRoles: string[];
@@ -13,7 +10,7 @@ type RequireAuthProps = {
 
 
 const RequireAuth: React.FC<RequireAuthProps> = ({ allowedRoles }) => {
-  const { auth } = useAuth() as unknown as AuthType;
+  const { auth } = useAuth() 
   const location = useLocation();
 
   return (

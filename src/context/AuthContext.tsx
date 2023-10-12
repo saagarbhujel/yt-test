@@ -2,13 +2,15 @@ import { createContext, useState } from "react";
 
 
 type AuthContextTypes = {
-auth:NonNullable<unknown> ,
-setAuth: React.Dispatch<React.SetStateAction<NonNullable<unknown>>>
+  auth:any;
+  setAuth: any;
+
 }
 
 const AuthContext = createContext<AuthContextTypes>({
   auth: {},
   setAuth: () => {},
+ 
 });
 
 type AuthContextProps = {
