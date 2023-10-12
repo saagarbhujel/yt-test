@@ -17,7 +17,7 @@ const RequireAuth: React.FC<RequireAuthProps> = ({ allowedRoles }) => {
   const location = useLocation();
 
   return (
-  auth?.role && allowedRoles.includes(auth?.role) ? 
+  auth?.role && allowedRoles?.includes(auth?.role) ? 
     <Outlet />
    : auth?.user
                 ? <Navigate to="/unauthorized" state={{ from: location }} replace />
