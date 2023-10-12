@@ -16,7 +16,6 @@ const Login = () => {
   const errRef = useRef<HTMLInputElement>(null);
 
       const [email, setEmail] = useState("");
-      const [country, setCountry] = useState("");
       const [password, setPassword] = useState("");
       const [errMsg, setErrMsg] = useState("");
 
@@ -27,14 +26,13 @@ const Login = () => {
 
       useEffect(()=>{
         setErrMsg("")
-      },[email, country, password])
+      },[email, password])
 
       const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
        try {
         const res = await axios.post('/player',JSON.stringify({
           email,
-          country,
           password,
         }),{
           headers: {
@@ -43,10 +41,9 @@ const Login = () => {
         })
         const accessToken = res?.data?.accessToken;
         const role = res?.data?.role;
-        setAuth({role, accessToken,email,country,})
+        setAuth({role, accessToken,email})
          navigate(from, { replace: true });
         setEmail("")
-        setCountry("")
         setPassword("")
        
        } catch (error:any) {
@@ -93,22 +90,6 @@ const Login = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
-            autoComplete="off"
-          />
-        </div>
-
-        <div className="flex flex-col m-2 w-full">
-          <label className="font-extralight mb-1" htmlFor="country">
-            Country
-          </label>
-          <input
-            className="border border-gray-300  h-9 pl-2 rounded-md font-light text-sm  outline-none focus:border-blue-300 focus:ring-4 ring-blue-500/20  transition-all ease-in-out "
-            type="text"
-            placeholder="Enter your country"
-            id="country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
             required
             autoComplete="off"
           />
