@@ -29,7 +29,7 @@ const useAxiosPrivate = () => {
                     prevRequest._isRetry = true;
                     try {
                         // Refresh the access token using the refresh function
-                        const newAccessToken = await refresh();
+                        const newAccessToken:string = await refresh();
                         // Update the Authorization header with the new access token
                         prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
                         // Retry the original request with the updated access token

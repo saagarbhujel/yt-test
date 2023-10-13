@@ -39,7 +39,7 @@ const Player = () => {
       // isMounted && controller.abort();
 
       isMounted = false;
-      controller.abort();
+      // controller.abort();
     };
   }, [])
 

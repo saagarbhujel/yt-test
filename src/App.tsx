@@ -3,13 +3,18 @@ import AdminLogin from "./components/admin/adminLogin";
 import Dashboard from "./components/admin/components/dashboard";
 import Login from "./components/login"
 import Signup from "./components/signup"
-import Profile from "./components/Profile.tsx";
+import Profile from "./pages/profile/Profile.tsx";
 import RequireAuth from "./components/RequireAuth";
 import { Routes, Route } from 'react-router-dom';
-import Home from "./components/Home";
+import Home from "./pages/home/Home.tsx";
 import Unauthorized from "./components/Unauthorize";
 import PresistLogin from "./components/PresistLogin";
 import Missing from "./components/Missing.tsx";
+import Stats from "./components/Stats.tsx";
+import Chat from "./pages/chat/Chat.tsx";
+import Game from "./pages/game/Game.tsx";
+import LeftAside from "./components/LeftAside.tsx";
+
 
 
 const ROLES = {
@@ -21,7 +26,10 @@ const ROLES = {
 function App() {
 
   return (
+    <section className="flex ">
+    <LeftAside />
     <Routes>
+      
       <Route path="/" element={<Layout />}>
         {/* Public Routes */}
         <Route path="login" element={<Login />} />
@@ -31,15 +39,22 @@ function App() {
 
         {/* Protected Routes */}
         <Route element={<PresistLogin/>}>
-                <Route element={<RequireAuth allowedRoles={[ROLES.player, ROLES.admin, ROLES.staff]}/>}>
+        <Route>
+                {/* <Route element={<RequireAuth allowedRoles={[ROLES.player, ROLES.admin, ROLES.staff]}/>}> */}
                   <Route path="/" element={<Home />} />
                 </Route>
 
-                 <Route element={<RequireAuth allowedRoles={[ROLES.player]} />}>
+                 {/* <Route element={<RequireAuth allowedRoles={[ROLES.player]} />}> */}
+                 <Route>
                   <Route path="profile" element={<Profile />} />
-                </Route>
+                  <Route path="stat" element={<Stats />} />
+                  <Route path="chat" element={<Chat />} />
+                  <Route path="game" element={<Game />} />
 
-                <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />}>
+                  
+                </Route>
+                <Route>
+                {/* <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />}> */}
                   <Route path="dashboard" element={<Dashboard />} />
                 </Route>
 
@@ -59,6 +74,7 @@ function App() {
         <Route path="*" element={<Missing/>} />
       </Route>
     </Routes>
+    </section>
   );
 }
 
