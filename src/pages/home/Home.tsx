@@ -22,6 +22,7 @@ const Home = () => {
      <Player />
       <Link to={"/profile"}>Profile</Link>
       <Link to={"/dashboard"}>Dashboard</Link>
+      <Link to={"/chat"}>Chat</Link>
        < button onClick={handleClick}>Logout</button>
     </div>
     </section>

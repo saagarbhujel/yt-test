@@ -17,6 +17,7 @@ import LeftAside from "./components/LeftAside.tsx";
 
 
 
+
 const ROLES = {
 'player': 'player',
 'admin': 'admin',
@@ -26,8 +27,7 @@ const ROLES = {
 function App() {
 
   return (
-    <section className="flex ">
-    <LeftAside />
+   
     <Routes>
       
       <Route path="/" element={<Layout />}>
@@ -74,7 +74,7 @@ function App() {
         <Route path="*" element={<Missing/>} />
       </Route>
     </Routes>
-    </section>
+   
   );
 }
 
