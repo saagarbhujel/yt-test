@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 import Player from '../../components/Player.tsx'
 import useLogout from "../../hooks/useLogout.ts";
 import LeftAside from "../../components/LeftAside.tsx";
+import NavBar from "./NavBar.tsx";
+import Hero from "./Hero.tsx";
 
 const Home = () => {
     const logout = useLogout()
@@ -11,8 +13,17 @@ const Home = () => {
     }
   return (
     <>
-  
-   
+      <section className="flex">
+        <div className="fixed">
+          <LeftAside />
+        </div>
+        <div className=" ml-[20vw]">
+          <NavBar />
+          <Hero />
+        </div>
+      </section>
+
+      {/*    
     <section className="flex ">
    <div>
   
@@ -25,9 +36,9 @@ const Home = () => {
       <Link to={"/chat"}>Chat</Link>
        < button onClick={handleClick}>Logout</button>
     </div>
-    </section>
+    </section> */}
     </>
-  )
+  );
 }
 
 export default Home
