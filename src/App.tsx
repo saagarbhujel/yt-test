@@ -49,7 +49,7 @@ function App() {
                   <Route path="profile" element={<Profile />} />
                   <Route path="stat" element={<Stats />} />
                   <Route path="chat" element={<Chat />} />
-                  <Route path="game" element={<Game />} />
+                  <Route path="game" element={<Game/>} />
 
                   
                 </Route>
