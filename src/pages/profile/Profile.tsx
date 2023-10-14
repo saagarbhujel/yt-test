@@ -1,16 +1,24 @@
 import {Link} from "react-router-dom";
 import LeftAside from "../../components/LeftAside";
+import NavBar from "../home/NavBar";
 
 
 const Profile = () => {
     return (
-      
-        <div>
-            Profile of player
-            <Link to={"/"}>Home</Link>
-            <Link to={"/dashboard"}>Dashboard</Link>
+      <section className="flex">
+        <div className="fixed">
+          <LeftAside />
         </div>
-      
+        <div className=" ml-[20vw]">
+         <NavBar />
+        </div>
+      </section>
+
+      // <div>
+      //     Profile of player
+      //     <Link to={"/"}>Home</Link>
+      //     <Link to={"/dashboard"}>Dashboard</Link>
+      // </div>
     );
 };
 
