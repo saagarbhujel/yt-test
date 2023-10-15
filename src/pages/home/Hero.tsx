@@ -11,7 +11,7 @@ const Hero = () => {
         {" "}
         <img
           className="h-[40vh] w-[50vh]"
-          src="public/assets/ludo.png"
+          src="/assets/ludo.png"
           alt="Dice Image"
         />
       </div>

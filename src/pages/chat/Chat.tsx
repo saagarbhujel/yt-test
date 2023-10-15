@@ -1,88 +1,62 @@
-import React, {useRef, useEffect,useState} from 'react'
-import { io, Socket } from 'socket.io-client'
-import InputForm from './InputForm'
-import ChatContainer from './ChatContainer'
-import SideNav from './SideNav'
+
+import React, { useRef, useEffect } from "react";
+import { io, Socket } from "socket.io-client";
+import useAuth from "../../hooks/useAuth";
+import RoomChat from "./RoomChat";
+
+
+
+
+
+
+
+
+
 
 
 const Chat = () => {
+  const socket = useRef<Socket>();
+  const {auth} = useAuth()
 
-  // const [connected, setConnected] = useState(false)
-  // const [username, setUsername] = useState('')
-  // const [connectedUsers, setConnectedUsers] = useState<string[]>([])
-  // const [messages, setMessages] = useState<string[]>([])
+  useEffect(() => {
+   socket.current = io("ws://192.168.18.127:8080", {
+     transports: ["websocket"],
+     extraHeaders: {
+       authorization: `Bearer ${auth?.accessToken}`,
+     },
+   });
 
-  // const socketClient = useRef<Socket>()
+    console.log(socket.current);
 
-  // useEffect(()=>{
-  //   socketClient.current = io("ws://192.168.18.127:8080");
-
-  //   if(socketClient.current){
-  //     console.log('connected')
-  //     socketClient.current.on("connect", () => {
-  //       setConnected(true)
-  //     })
-
-  //     // socketClient.current.on("error", (error) => {
-  //     //   console.error("WebSocket error:", error);
-  //     //   // Handle the error as needed
-  //     // });
-
-  //     //it is used to get the private message
-  //     socketClient.current.on("privateMessage", (data: string) => {
-  //       console.log("privateMessage", data);        
-  //       setMessages(prevMsg =>[...prevMsg, data])
-  //     })
+      socket.current.on("connect", () => {
+        console.log(socket.current?.id);
+      });
 
 
-   
-
-  //     //to disconnect the socket when unmount
-  //     return () => {
-  //       socketClient.current?.disconnect()
-  //     }
-  //   }
-  // },[])
 
 
-  //to send the message to the server
-  // const sendMessage = () => {
-  //   if(socketClient.current){
-  //     console.log('send message');
-  //     socketClient.current.emit("privateMessage", {
-  //       recipientId: "12324",
-  //       message: messages,
-  //     });
-  //     setMessages([])
-  //   }
-  // }
 
-  // const handleConnection = () => {
-  //   if(socketClient.current){
-  //     socketClient.current.emit("handle-connection")
-  //   }
-  // }
-  return (
-    <section className="  w-[100vw]  ">
-      <div className="flex">
-        <div className="w-[20vw] h-full ">
-          <SideNav />
-        </div>
+        //  socket.current.on("disconnect", () => {
+        //    console.log("Disconnected from the server");
+        //  });
 
-        <div className="w-[80vw] ">
-          <div className="fixed bg-white w-full">
-            <h2 className="text-[2rem] pl-4  border-b">Chats</h2>
-          </div>
-          <div className="overflow-scroll  h-[87vh] py-4 mt-4 mb-4 ">
-            <ChatContainer />
-          </div>
-          <div className="fixed bottom-2 ">
-            <InputForm />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+           socket.current.on("error", (error) => {
+             console.error("Socket.io error:", error);
+           });
+ 
+
+      return () => {
+        if (socket.current) {
+          socket.current.disconnect();
+        }
+      };
+  },[]);
+
+  //   
+  // });
+  return <div>Cha
+    <RoomChat socket={socket.current} />
+    t</div>;
+};
 
 export default Chat

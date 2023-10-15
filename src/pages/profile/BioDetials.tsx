@@ -41,7 +41,7 @@ const BioDetials = () => {
                       <div className='flex flex-col justify-end '>
                             <div>
                                 <div className='flex items-center justify-center w-[350px] h-[350px] p-9  border-black border rounded-full shadow-md '>
-                                  <img className='w-[300px] h-[300px]' src="public\assets\prfilepic.png" alt="profile pic" />
+                                  <img className='w-[300px] h-[300px]' src="\assets\prfilepic.png" alt="profile pic" />
                                
                                 </div>
                                {
