@@ -1,7 +1,9 @@
 import React from 'react'
+import useDetails from '../../hooks/useDetails'
 
 
 const NavBar = () => {
+  const {details} = useDetails()
 
   const greettings =()=>{
     if(new Date().getHours() < 12){
@@ -14,10 +16,10 @@ const NavBar = () => {
   }
   return (
     <nav className=" w-[80vw] h-20 flex items-end">
-      <div className="ml-8">
-        <h2 className="font-bold text-black text-[30px] ">
-          {greettings()}, <span className='text-green-500'>Player Name</span>
-        </h2>
+      <div className="ml-8 flex flex-row ">
+        <p className="font-bold text-black text-[30px] ">
+          {greettings()}, <span className='text-green-500 capitalize'>{details?.name ? details?.name : "Player"}</span>
+        </p>
       </div>
     </nav>
   );
