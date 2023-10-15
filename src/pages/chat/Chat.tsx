@@ -3,65 +3,75 @@ import { io, Socket } from 'socket.io-client'
 import InputForm from './InputForm'
 import ChatContainer from './ChatContainer'
 import SideNav from './SideNav'
+import useAuth from '../../hooks/useAuth'
 
+interface MessageEvent<T = any>
+  extends Pick<Event, 'type' | 'target' | 'currentTarget'> {
+  data: T;
+}
+type DefaultEventsMap = {
+  // Define your socket events here
+  // For example, if you have an event named 'privateMessage' that takes an object as an argument:
+  privateMessage: { message: string; recipientId: string };
+  message_room: { roomName: string; message: string };
+  // Add more events as needed
+};
 
 const Chat = () => {
+  const {auth} = useAuth()
+  console.log(auth?.accessToken);
+  
 
-  // const [connected, setConnected] = useState(false)
-  // const [username, setUsername] = useState('')
-  // const [connectedUsers, setConnectedUsers] = useState<string[]>([])
-  // const [messages, setMessages] = useState<string[]>([])
+  const [socket, setSocket] = useState<Socket<DefaultEventsMap, DefaultEventsMap> | null>(null);
 
-  // const socketClient = useRef<Socket>()
-
-  // useEffect(()=>{
-  //   socketClient.current = io("ws://192.168.18.127:8080");
-
-  //   if(socketClient.current){
-  //     console.log('connected')
-  //     socketClient.current.on("connect", () => {
-  //       setConnected(true)
-  //     })
-
-  //     // socketClient.current.on("error", (error) => {
-  //     //   console.error("WebSocket error:", error);
-  //     //   // Handle the error as needed
-  //     // });
-
-  //     //it is used to get the private message
-  //     socketClient.current.on("privateMessage", (data: string) => {
-  //       console.log("privateMessage", data);        
-  //       setMessages(prevMsg =>[...prevMsg, data])
-  //     })
+  const [message, setMessage] = useState<string>('');
+  const [roomName, setRoomName] = useState<string>('');
+  const [roomMessages, setRoomMessages] = useState<string[]>([]);
+  const [sseMessages, setSseMessages] = useState<string[]>([]);
+  const [privateMessages, setPrivateMessages] = useState<string[]>([]);
 
 
-   
+  
 
-  //     //to disconnect the socket when unmount
-  //     return () => {
-  //       socketClient.current?.disconnect()
-  //     }
-  //   }
-  // },[])
+  useEffect(() => {
+    // Connect to the Socket.io server when the component mounts
+    const socket = io('http://localhost:8080', {
+      extraHeaders: {
+        authorization:
+        `Bearer ${auth?.accessToken}`
+      }
+    });
+    setSocket(socket);
+
+       // make connection on private message and send message hlo in console
+        socket.on("private message", (data) => {
+          setPrivateMessages(data)
+          console.log(data);
+          
+        });
+
+        // make connection on private message and send message hlo in console
+        socket.on("message_room", (data) => {
+          setMessage(data)
+        });
+
+        
+    
+    return () => {
+      // Clean up the socket and eventSource when the component unmounts
+      socket.disconnect();
+     
+    };
+  }, []);
+
+ 
 
 
-  //to send the message to the server
-  // const sendMessage = () => {
-  //   if(socketClient.current){
-  //     console.log('send message');
-  //     socketClient.current.emit("privateMessage", {
-  //       recipientId: "12324",
-  //       message: messages,
-  //     });
-  //     setMessages([])
-  //   }
-  // }
 
-  // const handleConnection = () => {
-  //   if(socketClient.current){
-  //     socketClient.current.emit("handle-connection")
-  //   }
-  // }
+
+
+
+
   return (
     <section className="  w-[100vw]  ">
       <div className="flex">
