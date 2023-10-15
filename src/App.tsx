@@ -39,13 +39,13 @@ function App() {
 
         {/* Protected Routes */}
         <Route element={<PresistLogin/>}>
-        <Route>
-                {/* <Route element={<RequireAuth allowedRoles={[ROLES.player, ROLES.admin, ROLES.staff]}/>}> */}
+        {/* <Route> */}
+                <Route element={<RequireAuth allowedRoles={[ROLES.player, ROLES.admin, ROLES.staff]}/>}>
                   <Route path="/" element={<Home />} />
                 </Route>
 
-                 {/* <Route element={<RequireAuth allowedRoles={[ROLES.player]} />}> */}
-                 <Route>
+                 <Route element={<RequireAuth allowedRoles={[ROLES.player]} />}>
+                 {/* <Route> */}
                   <Route path="profile" element={<Profile />} />
                   <Route path="stat" element={<Stats />} />
                   <Route path="chat" element={<Chat />} />
@@ -53,8 +53,8 @@ function App() {
 
                   
                 </Route>
-                <Route>
-                {/* <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />}> */}
+                {/* <Route> */}
+                <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />}>
                   <Route path="dashboard" element={<Dashboard />} />
                 </Route>
 
