@@ -18,7 +18,7 @@ const LeftAside = () => {
 
   return (
     <>
-      <section className="  w-[20vw] h-[90vh]  flex items-center  flex-col border-r   ">
+      <section className=" md:w-[20vw] md:h-[100vh] hidden md:flex items-center  flex-col md:border-r   ">
         <div>
           <div className="mt-8 mb-12 ">
             <h1 className="text-center  text-[32px] font-bold">
@@ -59,9 +59,12 @@ const LeftAside = () => {
               ))}
             </ul>
             <div className="flex  flex-col justify-center md:items-center items-start ml-[4px]">
-              <button 
-              onClick={handleLogout}
-              className="bg-amber-500/80 hover:bg-amber-500 pl-8 pr-8  pt-3 pb-3 mb-8 rounded-md shadow-md text-[18px] font-semibold  ">Logout</button>
+              <button
+                onClick={handleLogout}
+                className="bg-amber-500 hover:bg-amber-500/80 pl-8 pr-8 text-white pt-3 pb-3 mb-8 rounded-md shadow-md text-[18px] font-semibold  "
+              >
+                Logout
+              </button>
             </div>
           </div>
         </div>
