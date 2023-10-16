@@ -1,26 +1,29 @@
 import React, { useEffect } from 'react'
-import useAxiosPrivate from '../../hooks/useAxiosPrivate'
+import axios from '../../api/axios';
+import useAuth from '../../hooks/useAuth';
 
 
 const PlayGame = () => {
-
-    let isMounted = true;
-    const controller = new AbortController();
-     const axiosPrivate = useAxiosPrivate();
+  const { auth } = useAuth();
+    // let isMounted = true;
+    // const controller = new AbortController();
+    //  const axiosPrivate = useAxiosPrivate();
 
     // console.log(auth?.accessToken);
     
 
-    const [gamePlayed, setGamePlayed] = React.useState(0)
-    const [gameWon, setGameWon] = React.useState(0)
-    const [experiencePoint, setExperiencePoint] = React.useState(0)
-    const [coins, setCoins] = React.useState(0) 
+    const [gamePlayed, setGamePlayed] = React.useState()
+    const [gameWon, setGameWon] = React.useState()
+    const [experiencePoint, setExperiencePoint] = React.useState()
+    const [coins, setCoins] = React.useState() 
     const [message, setMessage] = React.useState('')
 
   const playGame = async () => {
-       const res = await axiosPrivate.get('/player/play/game',  {
-              signal: controller.signal,
+       const res = await axios.get('/player/play/game',  {
+            headers: {
+              Authorization: `Bearer ${auth?.accessToken}`,
             }
+            },
         )
         // console.log(res);
         // console.log(res?.data);
@@ -33,18 +36,18 @@ const PlayGame = () => {
         setGameWon(res?.data.data.games_won)
         setMessage(res?.data.message)
        
-         isMounted 
+        //  isMounted 
     }
 
-    useEffect(()=>{
-        playGame()
-        return () => {
-            // isMounted && controller.abort();
+    // useEffect(()=>{
+    //     playGame()
+    //     return () => {
+    //         // isMounted && controller.abort();
         
-            isMounted = false;
-            // controller.abort();
-        }
-    },[])
+    //         isMounted = false;
+    //         // controller.abort();
+    //     }
+    // },[])
 
     
 
