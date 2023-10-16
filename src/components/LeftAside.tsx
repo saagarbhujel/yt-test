@@ -3,22 +3,30 @@ import { Link } from "react-router-dom";
 import { useActiveSectionContext } from "../context/active-section-context";
 import { navLinks } from "./constants/Credentials";
 import clsx from "clsx";
+import UseLogout from "../hooks/useLogout";
 
 const LeftAside = () => {
+  const logout = UseLogout()
+
 
      const { active, setActive, setTimeOfLastClick } = useActiveSectionContext();
 
+
+     const handleLogout = () => {
+        logout()
+     }
+
   return (
     <>
-      <section className="  w-[20vw] h-[100vh] flex items-center  flex-col border-r   ">
-        <div className="">
-          <div className="mt-8 mb-12">
+      <section className="  w-[20vw] h-[90vh]  flex items-center  flex-col border-r   ">
+        <div>
+          <div className="mt-8 mb-12 ">
             <h1 className="text-center  text-[32px] font-bold">
               {/* <Link to={"/"}>Yarsha Play</Link> */}
             </h1>
           </div>
 
-          <div className="     w-[17vw] h-[90vh] rounded-md mt-[8rem]">
+          <div className="     w-[17vw] h-[80vh] rounded-md mt-[8rem] flex flex-col justify-between ">
             <ul className="flex  flex-col justify-center md:items-center items-start ml-[4px] ">
               {navLinks.map((link) => (
                 <Link
@@ -50,6 +58,11 @@ const LeftAside = () => {
                 </Link>
               ))}
             </ul>
+            <div className="flex  flex-col justify-center md:items-center items-start ml-[4px]">
+              <button 
+              onClick={handleLogout}
+              className="bg-amber-500/80 hover:bg-amber-500 pl-8 pr-8  pt-3 pb-3 mb-8 rounded-md shadow-md text-[18px] font-semibold  ">Logout</button>
+            </div>
           </div>
         </div>
       </section>
