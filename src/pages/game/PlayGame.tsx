@@ -19,8 +19,10 @@ const PlayGame = () => {
     const [message, setMessage] = React.useState('')
 
   const playGame = async () => {
-       const res = await axiosPrivate.get('/player/play/game',  {
-              signal: controller.signal,
+       const res = await axios.get('/player/play/game',  {
+            headers: {
+                Authorization: `Bearer ${auth?.accessToken}`,
+            },
             }
         )
         // console.log(res);
@@ -34,7 +36,7 @@ const PlayGame = () => {
         setGameWon(res?.data.data.games_won)
         setMessage(res?.data.message)
        
-         isMounted 
+        //  isMounted 
     }
 
     // useEffect(()=>{
@@ -42,10 +44,10 @@ const PlayGame = () => {
     //     return () => {
     //         // isMounted && controller.abort();
         
-            isMounted = false;
+            // isMounted = false;
             // controller.abort();
-        }
-    },[])
+    //     }
+    // },[])
 
     
 
@@ -87,7 +89,7 @@ const PlayGame = () => {
         </section>
         <div className="flex justify-center">
           <p className="text-xl font-semibold text-blue-600 pb-4">
-            {messageDeliver}
+            {message}
           </p>
         </div>
       </div>
