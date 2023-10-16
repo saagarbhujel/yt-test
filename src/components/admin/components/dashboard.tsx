@@ -5,9 +5,23 @@ import React from 'react'
 const Dashboard = () => {
   return (
     <>
-      <h2>Welcome to admin dashboard</h2>
-      sdfjksdhl
-      {/* <Users /> */}
+     <section>
+      <div>
+
+        <div>
+          leaderboard
+        </div>
+
+          <div>
+
+          create user
+
+
+          </div>
+
+
+      </div>
+     </section>
     </>
   );
 }
