@@ -1,11 +1,15 @@
 import React,{useState, useEffect, useRef} from 'react'
 import axios from '../api/axios'
-import useAuth from '../hooks/useAuth';
 import {Link, useNavigate, useLocation} from 'react-router-dom';
 import useLocalStorage from "../hooks/useLocalStorage.tsx";
+import Cookies from 'universal-cookie';
+import jwtDecode from 'jwt-decode';
+
+
 
 const Login = () => {
-  const {setAuth} = useAuth()
+ 
+  const cookies = new Cookies();
 
 
   const navigate = useNavigate()
@@ -41,11 +45,20 @@ const Login = () => {
             'Content-Type': 'application/json'
           }
         })
+        // console.log(res?.data.accessToken);
         const accessToken = res?.data?.accessToken;
-        const refreshToken = res?.data?.refreshToken;
+        const decodedToken = jwtDecode(accessToken);
+        // console.log(decodedToken);
+        // console.log(decodedToken?.role);
+        const decodedRole = decodedToken?.role;
         const role = res?.data?.role;
-        setAuth({role, accessToken,refreshToken,email})
-         navigate(from, { replace: true });
+        const response = res?.data;
+        cookies.set('response', response,({path: '/',  secure: true, sameSite: 'none'}));
+         // setAuth({role, accessToken,refreshToken})
+         
+        if(role === decodedRole){
+          navigate(from, { replace: true });
+        }
         setEmail("")
         setPassword("")
        
@@ -71,10 +84,10 @@ const Login = () => {
     <section className="flex flex-col justify-center items-center h-[100vh]  ">
       <p
         ref={errRef}
-        className={errMsg ? "errmsg" : "offscreen"}
+        className={  errMsg ? "errmsg" : "offscreen"}
         aria-live="assertive"
       >
-        {errMsg}
+      <span className='text-red-600'>  {errMsg} </span>
       </p>
       <h1 className=" font-bold text-lg">Login to your account</h1>
       <form

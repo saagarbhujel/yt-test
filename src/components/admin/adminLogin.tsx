@@ -2,14 +2,17 @@ import React,{useState, useEffect,useRef} from 'react'
 import useAuth from "../../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "../../api/axios";
+import Cookies from 'universal-cookie';
+import jwtDecode from 'jwt-decode';
 
 const AdminLogin = () => {
-
+  const cookies = new Cookies();
   const { setAuth } = useAuth();
+  
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/dashboard";
+  const from = location.state?.from?.pathname || "/";
 
 
 const userRef = useRef<HTMLInputElement>(null);
@@ -44,14 +47,20 @@ const errRef = useRef<HTMLInputElement>(null);
              }
            );
            const accessToken = res?.data?.accessToken;
+           const decodedToken = jwtDecode(accessToken);
            const role = res?.data?.role;
-           const refreshToken = res?.data?.refreshToken;
-           setAuth({ role, accessToken,refreshToken, email});
-           console.log(res?.data?.accessToken);
-           console.log(role);
+           const decodedRole = decodedToken?.role;
+          //  const refreshToken = res?.data?.refreshToken;
+           const response = res?.data
+           cookies.set('response', response,({path: '/',  secure: true, sameSite: 'none'}));
+           setAuth(response);
+          //  console.log(res?.data?.accessToken);
+          //  console.log(role);
            
            
-           navigate(from, { replace: true });
+           if(role === decodedRole){
+            navigate(from, { replace: true });
+          }
            setEmail("");
            setPassword("");
          } catch (error: any) {

@@ -1,81 +1,52 @@
 import React, { useEffect } from 'react'
-import useAxiosPrivate from '../../hooks/useAxiosPrivate'
+import axios from '../../api/axios';
+import useAuth from '../../hooks/useAuth';
 
 
 const PlayGame = () => {
-
-    let isMounted = true;
-    const controller = new AbortController();
-     const axiosPrivate = useAxiosPrivate();
+  const { auth } = useAuth();
+    // let isMounted = true;
+    // const controller = new AbortController();
+    //  const axiosPrivate = useAxiosPrivate();
 
     // console.log(auth?.accessToken);
     
 
-    const [gamePlayed, setGamePlayed] = React.useState(0)
-    const [gameWon, setGameWon] = React.useState(0)
-    const [experiencePoint, setExperiencePoint] = React.useState(0)
-    const [coins, setCoins] = React.useState(0) 
+    const [gamePlayed, setGamePlayed] = React.useState()
+    const [gameWon, setGameWon] = React.useState()
+    const [experiencePoint, setExperiencePoint] = React.useState()
+    const [coins, setCoins] = React.useState() 
     const [message, setMessage] = React.useState('')
 
   const playGame = async () => {
-    try {
-      const res = await axiosPrivate.get('/player/play/game',  {
-        signal: controller.signal,
-      }
-  )
-  // console.log(res);
-  // console.log(res?.data);
-  // console.log(res?.data.data.games_played);
-  // console.log(res?.data.message);
+       const res = await axiosPrivate.get('/player/play/game',  {
+              signal: controller.signal,
+            }
+        )
+        // console.log(res);
+        // console.log(res?.data);
+        // console.log(res?.data.data.games_played);
+        // console.log(res?.data.message);
 
-  setCoins(res?.data.data.coins)
-  setExperiencePoint(res?.data.data.experience_point)
-  setGamePlayed(res?.data.data.games_played)
-  setGameWon(res?.data.data.games_won)
-  setMessage(res?.data.message)
- 
-   isMounted 
-    } catch (error) {
-      console.log(error,"Error Message");
-      
-    }finally{
-      setMessage('')
-    }
-      
+        setCoins(res?.data.data.coins)
+        setExperiencePoint(res?.data.data.experience_point)
+        setGamePlayed(res?.data.data.games_played)
+        setGameWon(res?.data.data.games_won)
+        setMessage(res?.data.message)
+       
+         isMounted 
     }
 
-    useEffect(()=>{
-        playGame()
-        return () => {
-            // isMounted && controller.abort();
+    // useEffect(()=>{
+    //     playGame()
+    //     return () => {
+    //         // isMounted && controller.abort();
         
             isMounted = false;
             // controller.abort();
         }
     },[])
 
-    const messageHandler = () => {
-
-        if(message === "game lost"){
-          return  <p className="text-red-500 text-[24px]">
-            Sorry! you lost the game.
-          </p>
-          } else if(message === "game won"){
-            return   <p className="text-blue-600 text-[24px]">
-            Congrulation you won the game.
-          </p>
-          } else{
-            return   <p className="text-blue-600 text-[24px]">
-            Play game.</p>
-          }
-
-
-      
-    
-    }
-
-    const messageDeliver = messageHandler()
-   
     
 
     

@@ -2,7 +2,7 @@ import React from 'react'
 import { useLocation,Navigate, Outlet } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 import jwt_decode from "jwt-decode";
-
+import Cookie from 'universal-cookie';
 
 
 type RequireAuthProps = {
@@ -14,11 +14,18 @@ type AuthToken = {
 };
 
 const RequireAuth: React.FC<RequireAuthProps> = ({ allowedRoles }) => {
-  const { auth } = useAuth()
+  const cookies = new Cookie();
+const auth = cookies.get("response")
+const accessToken = auth?.accessToken
+const decoded:AuthToken | undefined = jwt_decode(accessToken)
+const role = decoded?.role
+
+
+
   const location = useLocation();
-  const decoded:AuthToken | undefined = auth.accessToken ? jwt_decode(auth.accessToken) : undefined
+  // const decoded:AuthToken | undefined = auth.accessToken ? jwt_decode(auth.accessToken) : undefined
   // console.log(decoded?.role)
-  const role = decoded?.role ? decoded?.role : undefined
+  // const role = decoded?.role ? decoded?.role : undefined
   // console.log(role)
 
   return (
