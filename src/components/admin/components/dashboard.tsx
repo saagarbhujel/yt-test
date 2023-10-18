@@ -1,27 +1,27 @@
 import React from 'react'
 // import Users from '../../Player';
 
+import NavBar from '../../../pages/home/NavBar';
+
+import AddUser from './addUser';
+import AdminLeftAside from './adminAside';
+import AdminNavBar from './adminNav';
+
 
 const Dashboard = () => {
   return (
     <>
-     <section>
-      <div>
-
-        <div>
-          leaderboard
+      <section className="flex">
+        <div className="fixed">
+          <AdminLeftAside />
         </div>
-
-          <div>
-
-          create user
-
-
-          </div>
-
-
-      </div>
-     </section>
+        
+        <div className=" ml-[20vw]">
+          <AdminNavBar />
+         <AddUser />
+        </div>
+        
+      </section>
     </>
   );
 }
