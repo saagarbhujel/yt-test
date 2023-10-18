@@ -28,8 +28,9 @@ const LeftAside = () => {
 
           <div className="     w-[17vw] h-[80vh] rounded-md mt-[8rem] flex flex-col justify-between ">
             <ul className="flex  flex-col justify-center md:items-center items-start ml-[4px] ">
-              {navLinks.map((link) => (
+              {navLinks.map((link, index) => (
                 <Link
+                key={index}
                   className={clsx("w-full  text-gray-400  transition btn", {
                     "text-black": active === link.title,
                   })}
