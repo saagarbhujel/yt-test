@@ -12,7 +12,7 @@ const AdminLogin = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/dashboard";
 
 
 const userRef = useRef<HTMLInputElement>(null);
