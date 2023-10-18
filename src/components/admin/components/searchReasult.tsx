@@ -21,9 +21,8 @@ type searchItemType = {
 
 const SearchReasult = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPlayer, setSelectedPlayer] = useState<searchItemType | null>(
-    null
-  );
+  const [selectedPlayer, setSelectedPlayer] = useState<searchItemType | null>( null);
+
 
   const { loading } = useSearch();
 
@@ -56,7 +55,7 @@ const SearchReasult = () => {
             <h2 className=" text-[28px] font font-semibold mb-10">
               Search Reasults
             </h2>
-            <div className="w-[75vw] ">
+            <div className="w-[70vw] ">
               {loading ? <p>Loading...</p> : null}
               {searchResult.length === 0 ? (
                 <p>No results found.</p>
@@ -88,6 +87,7 @@ const SearchReasult = () => {
               isOpen={isModalOpen}
               onClose={closeModal}
               playerInfo={selectedPlayer}
+            
             />
           </div>      
         </div>
