@@ -1,12 +1,8 @@
-// import React, { useEffect } from "react";
-// import axios from "../api/axios";
-// import useAuth from "../hooks/useAuth";
-// import useDebounce from "../hooks/useDebounce";
+
 import { useNavigate, useLocation  } from "react-router-dom";
 import useSearch from "../hooks/useSearch";
 
 const Search = () => {
-  // const { auth } = useAuth();
   const {searchResult, loading,search,country, setSearch,setCountry} = useSearch()
 
   const navigate = useNavigate()
@@ -15,11 +11,7 @@ const Search = () => {
 
 
   const handleSubmit = () => {
-    console.log(searchResult);
-    
-
     navigate(from,{ state: {searchResult, loading}});
-
   };
 
   return (
