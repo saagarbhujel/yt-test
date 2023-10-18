@@ -15,6 +15,7 @@ import Chat from "./pages/chat/Chat.tsx";
 import Game from "./pages/game/Game.tsx";
 import LeftAside from "./components/LeftAside.tsx";
 import NavBar from "./pages/home/NavBar.tsx";
+import SearchReasult from "./components/admin/components/searchReasult.tsx";
 
 
 
@@ -29,15 +30,8 @@ function App() {
 
   return (
     <section>
-   <div className="flex ">
-    <div>
-      <LeftAside />
-    </div>
-    <div>
-      <NavBar />
-    </div>
+   
 
-   </div>
      
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -47,10 +41,12 @@ function App() {
           <Route path="admin/login" element={<AdminLogin />} />
           <Route path="unauthorized" element={<Unauthorized />} />
           <Route path="/" element={<Home />} />
-          <Route path="dashboard" element={<Dashboard />} />
+      
 
           {/* Protected Routes */}
+          
           <Route element={<PresistLogin />}>
+        
             {/* <Route> */}
             <Route
               element={
@@ -71,8 +67,9 @@ function App() {
             </Route>
             {/* <Route> */}
             <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />}>
-              {/* <Route path="dashboard" element={<Dashboard />} /> */}
-            </Route>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="search" element={<SearchReasult />} />
+             </Route>
 
             {/* <Route element={<RequireAuth allowedRoles={[ROLES.staff]} />}>
                   <Route path="admin/dashboard" element={<Dashboard />} />
