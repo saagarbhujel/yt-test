@@ -1,6 +1,7 @@
 import React from 'react'
 import useDetails from '../../hooks/useDetails'
 import { useNavigate, useLocation } from 'react-router-dom'
+import Search from '../../components/Search'
 
 
 const NavBar = () => {
@@ -21,7 +22,7 @@ const NavBar = () => {
     }
   }
   return (
-    <nav className=" w-[100%] h-20 md:w-[80vw]  flex justify-between items-center  fixed md:mr-10 ">
+    <nav className=" w-[100%] h-20 md:w-[80vw] xl:[80vw] flex justify-between items-center  fixed md:mr-10 ">
       <div className="ml-4 md:ml-8 md:flex flex-row ">
         <p className=" font-semibold md:font-bold text-black md:text-[30px] ">
           {greettings()},{" "}
@@ -31,7 +32,7 @@ const NavBar = () => {
         </p>
       </div>
       <div className='mt-4 w-[25vw] '>
-        <input type="search" className=' hidden md:block border border-slate-700 outline-none pl-4 pr-4 pt-2 pb-2 w-full  rounded-md' />
+       {/* <Search /> */}
       </div>
       <div className=' mr-6 md:mr-10 md:mt-4'>
         <button

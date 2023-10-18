@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import LeftAside from "../../components/LeftAside.tsx";
 import NavBar from "./NavBar.tsx";
 import Hero from "./Hero.tsx";
+import LeaderBoard from "../../components/admin/components/leaderBoard.tsx";
 
 const Home = () => {
    
@@ -16,7 +17,8 @@ const Home = () => {
         </div>
         <div className=" ml-[20vw]">
           <NavBar />
-          <Hero />
+          <LeaderBoard />
+          {/* <Hero /> */}
         </div>
         
       </section>

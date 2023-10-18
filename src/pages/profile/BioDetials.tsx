@@ -3,9 +3,9 @@ import useDetails from '../../hooks/useDetails'
 
 const BioDetials = () => {
   const {details} = useDetails()
-  console.log(details?.id);
-  console.log(details.statistics?.games_played);
-  console.log(details?.country);
+  // console.log(details?.id);
+  // console.log(details.statistics?.games_played);
+  // console.log(details?.country);
  const country = details?.country  
 
   const countrySelector = () => {
@@ -27,7 +27,7 @@ const BioDetials = () => {
   }
   
   const Country = countrySelector()
-  console.log(countrySelector());
+  // console.log(countrySelector());
   
   return (
     <section className=' h-[80vh] w-[100%] mt-8 flex justify-center items-center   '>

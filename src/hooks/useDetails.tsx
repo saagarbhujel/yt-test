@@ -21,7 +21,7 @@ useEffect(()=>{
         setDetails(res?.data);
         console.log(res?.data?.statistics);
         
-    
+    isMounted
 
     }
 
