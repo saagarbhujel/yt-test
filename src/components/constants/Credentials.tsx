@@ -26,3 +26,12 @@ export const navLinks = [
   },
  
 ] as const;
+
+
+export const navLinksAdmin = [
+  {
+    id:'#dashboard',
+    title:'Home',
+    path:'/dashboard'
+  },
+] as const;
