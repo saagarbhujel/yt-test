@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import useAxiosPrivate from '../../../hooks/useAxiosPrivate'
-import axios from "../../../api/axios";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+
 import useAuth from "../../../hooks/useAuth";
 
 type LeaderBoardType = {
@@ -20,7 +20,8 @@ const LeaderBoard = () => {
   const axiosPrivate = useAxiosPrivate();
   const { auth } = useAuth();
 
-  const [leaderBoard, setLeaderBoard] = React.useState<[]>([]);
+  const [leaderBoard, setLeaderBoard] = React.useState<LeaderBoardType[]>([]);
+  // const [message, setMessage] = React.useState<string>("");
 
   const fetchLeaderBoard = async () => {
     const res = await axiosPrivate.get("/player/leaderboard", {
@@ -29,11 +30,21 @@ const LeaderBoard = () => {
       },
     });
     setLeaderBoard(res.data);
+    // console.log(res.data);
   };
 
   useEffect(() => {
     fetchLeaderBoard();
-  }, [leaderBoard]);
+
+    const pollInterval = setInterval(() => {
+      fetchLeaderBoard();
+    }, 10000);
+
+    return () => {
+      clearInterval(pollInterval);
+    };
+  }, []);
+
   return (
     <section className="mt-[12rem]">
       <div>
