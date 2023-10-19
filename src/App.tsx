@@ -5,7 +5,7 @@ import Login from "./components/login"
 import Signup from "./components/signup"
 import Profile from "./pages/profile/Profile.tsx";
 import RequireAuth from "./components/RequireAuth";
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, redirectDocument } from 'react-router-dom';
 import Home from "./pages/home/Home.tsx";
 import Unauthorized from "./components/Unauthorize";
 import PresistLogin from "./components/PresistLogin";
@@ -16,8 +16,7 @@ import Game from "./pages/game/Game.tsx";
 import LeftAside from "./components/LeftAside.tsx";
 import NavBar from "./pages/home/NavBar.tsx";
 import SearchReasult from "./components/admin/components/searchReasult.tsx";
-
-
+import useAuth from "./hooks/useAuth.tsx";
 
 
 const ROLES = {
@@ -27,6 +26,9 @@ const ROLES = {
 }
 
 function App() {
+  const {auth} = useAuth();
+  const isAuthenticated = auth?.accessToken ? true : false;
+
 
   return (
     <section>
@@ -40,11 +42,16 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route path="admin/login" element={<AdminLogin />} />
           <Route path="unauthorized" element={<Unauthorized />} />
-          <Route path="/" element={<Home />} />
-      
+         
 
           {/* Protected Routes */}
-          
+          {!isAuthenticated ? (
+            <Route path="/" element={<Login/>} />
+
+          ):(
+            <Route path="/home" element={<Home />} />
+
+          )}
           <Route element={<PresistLogin />}>
         
             {/* <Route> */}
@@ -55,7 +62,7 @@ function App() {
                 />
               }
             >
-              {/* <Route path="/" element={<Home />} /> */}
+              <Route path="/home" element={<Home />} />
             </Route>
 
             <Route element={<RequireAuth allowedRoles={[ROLES.player]} />}>
@@ -71,9 +78,9 @@ function App() {
               <Route path="search" element={<SearchReasult />} />
              </Route>
 
-            {/* <Route element={<RequireAuth allowedRoles={[ROLES.staff]} />}>
-                  <Route path="admin/dashboard" element={<Dashboard />} />
-                </Route> */}
+            <Route element={<RequireAuth allowedRoles={[ROLES.staff]} />}>
+                  <Route path="dashboard" element={<Dashboard />} />
+                </Route>
 
             {/* <Route
                   element={<RequireAuth allowedRoles={[ROLES.admin, ROLES.staff]} />}
