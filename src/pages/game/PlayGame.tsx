@@ -1,57 +1,44 @@
-import React, { useEffect } from 'react'
-import axios from '../../api/axios';
-import useAuth from '../../hooks/useAuth';
-
+import React, { useEffect } from "react";
+import axios from "../../api/axios";
+import useAuth from "../../hooks/useAuth";
 
 const PlayGame = () => {
   const { auth } = useAuth();
-    // let isMounted = true;
-    // const controller = new AbortController();
-    //  const axiosPrivate = useAxiosPrivate();
+  let isMounted = true;
+  const controller = new AbortController();
 
-    // console.log(auth?.accessToken);
-    
-
-    const [gamePlayed, setGamePlayed] = React.useState()
-    const [gameWon, setGameWon] = React.useState()
-    const [experiencePoint, setExperiencePoint] = React.useState()
-    const [coins, setCoins] = React.useState() 
-    const [message, setMessage] = React.useState('')
+  const [gamePlayed, setGamePlayed] = React.useState();
+  const [gameWon, setGameWon] = React.useState();
+  const [experiencePoint, setExperiencePoint] = React.useState();
+  const [coins, setCoins] = React.useState();
+  const [message, setMessage] = React.useState("");
 
   const playGame = async () => {
-       const res = await axios.get('/player/play/game',  {
-            headers: {
-                Authorization: `Bearer ${auth?.accessToken}`,
-            },
-            }
-        )
-        // console.log(res);
-        // console.log(res?.data);
-        // console.log(res?.data.data.games_played);
-        // console.log(res?.data.message);
+    const res = await axios.get("/player/play/game", {
+      headers: {
+        Authorization: `Bearer ${auth?.accessToken}`,
+      },
+    });
 
-        setCoins(res?.data.data.coins)
-        setExperiencePoint(res?.data.data.experience_point)
-        setGamePlayed(res?.data.data.games_played)
-        setGameWon(res?.data.data.games_won)
-        setMessage(res?.data.message)
-       
-        //  isMounted 
-    }
+    setCoins(res?.data.data.coins);
+    setExperiencePoint(res?.data.data.experience_point);
+    setGamePlayed(res?.data.data.games_played);
+    setGameWon(res?.data.data.games_won);
+    setMessage(res?.data.message);
 
-    // useEffect(()=>{
-    //     playGame()
-    //     return () => {
-    //         // isMounted && controller.abort();
-        
-            // isMounted = false;
-            // controller.abort();
-    //     }
-    // },[])
+    isMounted;
+  };
 
-    
+  useEffect(() => {
+    playGame();
+    return () => {
+      // isMounted && controller.abort();
 
-    
+      isMounted = false;
+      controller.abort();
+    };
+  }, []);
+
   return (
     <div className="h-[80vh]  mt-8">
       <div className="h-[70%] flex flex-col  ">
@@ -88,9 +75,7 @@ const PlayGame = () => {
           </div>
         </section>
         <div className="flex justify-center">
-          <p className="text-xl font-semibold text-blue-600 pb-4">
-            {message}
-          </p>
+          <p className="text-xl font-semibold text-blue-600 pb-4">{message}</p>
         </div>
       </div>
       <div className="flex justify-center items-center">
@@ -103,6 +88,6 @@ const PlayGame = () => {
       </div>
     </div>
   );
-}
+};
 
-export default PlayGame
+export default PlayGame;
