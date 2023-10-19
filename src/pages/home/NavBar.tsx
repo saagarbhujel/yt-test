@@ -1,7 +1,7 @@
 import React from 'react'
 import useDetails from '../../hooks/useDetails'
 import { useNavigate, useLocation } from 'react-router-dom'
-import Search from '../../components/Search'
+import EventHandle from '../../components/admin/components/EventSource'
 
 
 const NavBar = () => {
@@ -31,8 +31,9 @@ const NavBar = () => {
           </span>
         </p>
       </div>
-      <div className='mt-4 w-[25vw] '>
+      <div className='mt-4  '>
        {/* <Search /> */}
+       <EventHandle />
       </div>
       <div className=' mr-6 md:mr-10 md:mt-4'>
         <button
@@ -45,6 +46,7 @@ const NavBar = () => {
           Dashboard
         </button>
       </div>
+      
     </nav>
   );
 }
