@@ -31,10 +31,7 @@ function App() {
   const {auth} = useAuth();
   const isAuthenticated = auth?.accessToken ? true : false;
 
-  const navigate = useNavigate();
- if(!auth){
-  navigate("/login");
- }
+
 
   return (
     <section>
@@ -52,7 +49,7 @@ function App() {
 
           {/* Protected Routes */}
           {!isAuthenticated ? (
-            <Route path="/" element={<Login/>} />
+            <Route path="/login" element={<Login/>} />
 
           ):(
             <Route path="/home" element={<Home />} />
