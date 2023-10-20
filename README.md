@@ -10,7 +10,8 @@ Use these credentials:
 
 ## Usage
 - Use `npm install` to install required dependencies
-- Use `npm i universal-cookies` 
+- Use `npm i universal-cookies`
+- Update api url in src/api/axios.tsx
 
 ## Features
 
@@ -24,10 +25,10 @@ Use these credentials:
 
 
 ## Routes
-- `/admin/login` - Login page for unauthenticated users
-- `/signup` - Login page for unauthenticated users
-- `/login` - Login page for unauthenticated users
-- `/` - Home/Dashboard for authenticated users
+- `/admin/login` - Login page for admin
+- `/signup` - Signup for new user
+- `/login` - Login page  users
+- `/home` - Home for authenticated users
 -
 - 
 
