@@ -276,7 +276,7 @@ const Signup = () => {
             <input
               className="border border-gray-300 outline-none h-9 pl-2 rounded-md font-light text-sm focus:border-blue-300 focus:ring-4 ring-blue-500/20  transition-all ease-in-out"
               type="text"
-              placeholder="Choose your country"
+              placeholder="Choose your country {np, au, us, af,in}"
               id="country"
               value={country}
               onChange={(e) => setCountry(e.target.value)}
