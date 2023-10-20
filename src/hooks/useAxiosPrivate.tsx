@@ -38,7 +38,7 @@ const useAxiosPrivate = () => {
                         // Handle the refresh token error, for example, by logging the user out
                         // and redirecting them to the login page
                         // You might want to define your own error handling logic here
-                        console.error('Token refresh failed:', refreshError);
+                        // console.error('Token refresh failed:', refreshError);
                         // Handle token refresh error here, e.g., log out the user
                     }
                 }

@@ -1,16 +1,21 @@
 
+
+
+import React, { useState, useEffect } from "react";
+import { io } from "socket.io-client";
 import LeftAside from "../../components/LeftAside";
 import NavBar from "../home/NavBar";
-
+import RoomName from "./RoomName";
 import ChatContainer from "./ChatContainer";
+import ChatContainerPrivate from "./ChatContainerPrivate";
 
 
 
 
-const ChatRoom = () => {
+const ChatPrivate = () => {
   
 
-  const roomName = localStorage.getItem('room')
+  
     
 
   return (
@@ -26,13 +31,11 @@ const ChatRoom = () => {
           <div className="fixed bg-white w-full">
             <NavBar />
           </div>
-          <div className=" flex justify-center items-center w-full h-[87vh] py-4 mt-4 mb-4 ">
-          {!roomName ? <div className="flex justify-center ">
-            <button className=" outline-none rounded-md bg-green-400 pl-2 pr-2 p-2 text-black" >JoinRoom</button> 
-
-          </div>: <div>
-             <ChatContainer />
-            </div>}
+          <div className=" flex justify-center items-center w-full h-[87vh] py-4 mt-4 mb-4 ml-8">
+          
+        
+             <ChatContainerPrivate />
+      
           </div>
         
         </div>
@@ -42,4 +45,4 @@ const ChatRoom = () => {
   );
 };
 
-export default ChatRoom;
+export default ChatPrivate;
