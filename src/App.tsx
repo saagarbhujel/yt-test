@@ -5,7 +5,7 @@ import Login from "./components/login"
 import Signup from "./components/signup"
 import Profile from "./pages/profile/Profile.tsx";
 import RequireAuth from "./components/RequireAuth";
-import { Routes, Route, redirectDocument } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Home from "./pages/home/Home.tsx";
 import Unauthorized from "./components/Unauthorize";
 import PresistLogin from "./components/PresistLogin";
@@ -13,11 +13,10 @@ import Missing from "./components/Missing.tsx";
 import Stats from "./components/Stats.tsx";
 import Chat from "./pages/chat/Chat.tsx";
 import Game from "./pages/game/Game.tsx";
-import LeftAside from "./components/LeftAside.tsx";
-import NavBar from "./pages/home/NavBar.tsx";
+
 import SearchReasult from "./components/admin/components/searchReasult.tsx";
 import useAuth from "./hooks/useAuth.tsx";
-import ChatContainer from "./pages/chat/ChatContainer.tsx";
+
 import ChatRoom from "./pages/chat/chatRoom.tsx";
 import ChatPrivate from "./pages/chat/ChatPrivate.tsx";
 
@@ -32,6 +31,10 @@ function App() {
   const {auth} = useAuth();
   const isAuthenticated = auth?.accessToken ? true : false;
 
+  const navigate = useNavigate();
+ if(!auth){
+  navigate("/login");
+ }
 
   return (
     <section>
@@ -87,11 +90,7 @@ function App() {
                   <Route path="dashboard" element={<Dashboard />} />
                 </Route>
 
-            {/* <Route
-                  element={<RequireAuth allowedRoles={[ROLES.admin, ROLES.staff]} />}
-                >
-                  <Route path="admin/dashboard" element={<Dashboard />} />
-                </Route> */}
+         
           </Route>
 
           {/* Catch for all */}

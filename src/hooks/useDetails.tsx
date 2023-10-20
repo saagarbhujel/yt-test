@@ -17,9 +17,9 @@ useEffect(()=>{
         const res = await axiosPrivate.get("/player", {
           signal: controller.signal,
         });
-        console.log(res?.data);
+        // console.log(res?.data);
         setDetails(res?.data);
-        console.log(res?.data?.statistics);
+        // console.log(res?.data?.statistics);
         
     isMounted
 

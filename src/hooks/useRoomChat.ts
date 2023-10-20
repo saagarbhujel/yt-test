@@ -53,7 +53,7 @@ const useRoomChat = () => {
         setRooms(rooms);
       }
     } catch (err) {
-      console.error("Error fetching rooms:", err);
+      // console.error("Error fetching rooms:", err);
     } finally {
       setIsLoadingRooms(false);
     }
@@ -79,7 +79,7 @@ const useRoomChat = () => {
       }
       return map
     } catch (err) {
-      console.error('Error fetching players:', err)
+      // console.error('Error fetching players:', err)
     } finally {
       setIsLoadingPlayers(false)
     }
@@ -144,7 +144,7 @@ const useRoomChat = () => {
             setMessages(messages)
           }
         } catch (err) {
-          console.error('Error getting messages:', err)
+          // console.error('Error getting messages:', err)
         } finally {
           setIsLoadingMessages(false)
         }
@@ -166,7 +166,7 @@ const useRoomChat = () => {
         setMessages(messages)
       }
     } catch (err) {
-      console.error('Error fetching private messages:', err)
+      // console.error('Error fetching private messages:', err)
     } finally {
       setIsLoadingMessages(false)
     }

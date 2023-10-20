@@ -40,7 +40,7 @@ const PlayGame = () => {
   }, []);
 
   return (
-    <div className="h-[80vh]  mt-8">
+    <div className="h-[80vh] ml-16  mt-8">
       <div className="h-[70%] flex flex-col  ">
         <section className="flex justify-evenly h-[70%]">
           <div className="flex flex-col justify-evenly h-36 items-center mt-16 mb-16  bg-green-400/10 w-[15rem] shadow-md ">

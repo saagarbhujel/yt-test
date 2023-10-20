@@ -31,7 +31,7 @@ const BioDetials = () => {
   
   return (
     <section className=' h-[80vh] w-[100%] mt-8 flex justify-center items-center   '>
-      <div className='flex bg-gray-600/10 w-[80%] flex-col justify-center items-center  h-[38rem] rounded-md'>
+      <div className='flex bg-gray-600/10 ml-16 w-[100%] flex-col justify-center items-center  h-[38rem] rounded-md'>
              
 
             <div className='flex justify-center item-center   h-[70%] w-[70%] '>
@@ -66,7 +66,7 @@ const BioDetials = () => {
                             </div>
                         </div>
 
-                      <div className= 'bg-blue-500/10 ml-[8rem] w-[45%]  h-[250px] flex mb-28 pt-4 rounded-md shadow-md     justify-center '>
+                      <div className= ' ml-[8rem] w-[45%]  h-[250px] flex mb-28 pt-4 rounded-md   justify-center '>
                             
                             <div className='flex  flex-col items-center ' >
                             <p className='  first-letter:capitalize mb-2 underline font-bold text-center text-[2.8rem] text-orange-500' >

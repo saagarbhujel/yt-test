@@ -28,7 +28,7 @@ const PlayerUpdateModal = ({
   if (!modalOpen) return null;
 
   const handleUpdatePlayer = async () => {
-    console.log("update player");
+    // console.log("update player");
 
     const res = await axios.put(
       `/user/player/update/${id}`,
@@ -44,7 +44,7 @@ const PlayerUpdateModal = ({
         },
       }
     );
-    console.log(res.data);
+    // console.log(res.data);
     setMessage(res.data.message);
     setUpdateModal(false);
 
