@@ -35,7 +35,7 @@ const NavBar = () => {
        {/* <Search /> */}
        <EventHandle />
       </div>
-      <div className=' mr-6 md:mr-10 md:mt-4'>
+      {/* <div className=' mr-6 md:mr-10 md:mt-4'>
         <button
         onClick={
           ()=>{
@@ -45,7 +45,7 @@ const NavBar = () => {
         className=" bg-green-500 hover:bg-green-500/90 pl-4 md:pl-6 pr-4 md:pr-6 text-white pt-2 md:pt-3 pb-2 md:pb-3 rounded-md shadow-md md:text-[18px] md:font-semibold ">
           Dashboard
         </button>
-      </div>
+      </div> */}
       
     </nav>
   );

@@ -17,6 +17,9 @@ import LeftAside from "./components/LeftAside.tsx";
 import NavBar from "./pages/home/NavBar.tsx";
 import SearchReasult from "./components/admin/components/searchReasult.tsx";
 import useAuth from "./hooks/useAuth.tsx";
+import ChatContainer from "./pages/chat/ChatContainer.tsx";
+import ChatRoom from "./pages/chat/chatRoom.tsx";
+import ChatPrivate from "./pages/chat/ChatPrivate.tsx";
 
 
 const ROLES = {
@@ -67,9 +70,11 @@ function App() {
 
             <Route element={<RequireAuth allowedRoles={[ROLES.player]} />}>
               {/* <Route> */}
+              <Route path="chatRoom" element={<ChatRoom />} />
               <Route path="profile" element={<Profile />} />
               <Route path="stat" element={<Stats />} />
               <Route path="chat" element={<Chat />} />
+              <Route path="chatPrivate" element={<ChatPrivate />} />
               <Route path="game" element={<Game />} />
             </Route>
             {/* <Route> */}

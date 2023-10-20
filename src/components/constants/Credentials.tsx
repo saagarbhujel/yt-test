@@ -10,11 +10,6 @@ export const navLinks = [
     path: "/profile",
   },
   {
-    id: "#statistics",
-    title: "Statistics",
-    path: "/statistics",
-  },
-  {
     id: "#chats",
     title: "Chats",
     path: "/chat",
@@ -24,6 +19,7 @@ export const navLinks = [
     title: "Game",
     path: "/game",
   },
+
  
 ] as const;
 
