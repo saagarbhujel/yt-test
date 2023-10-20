@@ -1,62 +1,49 @@
-import React, { useEffect } from 'react'
-import axios from '../../api/axios';
-import useAuth from '../../hooks/useAuth';
-
+import React, { useEffect } from "react";
+import axios from "../../api/axios";
+import useAuth from "../../hooks/useAuth";
 
 const PlayGame = () => {
   const { auth } = useAuth();
-    // let isMounted = true;
-    // const controller = new AbortController();
-    //  const axiosPrivate = useAxiosPrivate();
+  let isMounted = true;
+  const controller = new AbortController();
 
-    // console.log(auth?.accessToken);
-    
-
-    const [gamePlayed, setGamePlayed] = React.useState()
-    const [gameWon, setGameWon] = React.useState()
-    const [experiencePoint, setExperiencePoint] = React.useState()
-    const [coins, setCoins] = React.useState() 
-    const [message, setMessage] = React.useState('')
+  const [gamePlayed, setGamePlayed] = React.useState();
+  const [gameWon, setGameWon] = React.useState();
+  const [experiencePoint, setExperiencePoint] = React.useState();
+  const [coins, setCoins] = React.useState();
+  const [message, setMessage] = React.useState("");
 
   const playGame = async () => {
-       const res = await axios.get('/player/play/game',  {
-            headers: {
-              Authorization: `Bearer ${auth?.accessToken}`,
-            }
-            },
-        )
-        // console.log(res);
-        // console.log(res?.data);
-        // console.log(res?.data.data.games_played);
-        // console.log(res?.data.message);
+    const res = await axios.get("/player/play/game", {
+      headers: {
+        Authorization: `Bearer ${auth?.accessToken}`,
+      },
+    });
 
-        setCoins(res?.data.data.coins)
-        setExperiencePoint(res?.data.data.experience_point)
-        setGamePlayed(res?.data.data.games_played)
-        setGameWon(res?.data.data.games_won)
-        setMessage(res?.data.message)
-       
-        //  isMounted 
-    }
+    setCoins(res?.data.data.coins);
+    setExperiencePoint(res?.data.data.experience_point);
+    setGamePlayed(res?.data.data.games_played);
+    setGameWon(res?.data.data.games_won);
+    setMessage(res?.data.message);
 
-    // useEffect(()=>{
-    //     playGame()
-    //     return () => {
-    //         // isMounted && controller.abort();
-        
-    //         isMounted = false;
-    //         // controller.abort();
-    //     }
-    // },[])
+    isMounted;
+  };
 
-    
+  useEffect(() => {
+    playGame();
+    return () => {
+      // isMounted && controller.abort();
 
-    
+      isMounted = false;
+      controller.abort();
+    };
+  }, []);
+
   return (
-    <div className="h-[80vh]  mt-8">
+    <div className="h-[80vh] ml-16  mt-8">
       <div className="h-[70%] flex flex-col  ">
         <section className="flex justify-evenly h-[70%]">
-          <div className="flex flex-col justify-evenly h-36 items-center mt-16 mb-16  bg-slate-400/20 w-[15rem] shadow-md ">
+          <div className="flex flex-col justify-evenly h-36 items-center mt-16 mb-16  bg-green-400/10 w-[15rem] shadow-md ">
             <span className="text-[4rem] text-blue-600 pl-6 pr-6">
               {gamePlayed}
             </span>
@@ -66,7 +53,7 @@ const PlayGame = () => {
             </p>
           </div>
 
-          <div className="flex flex-col justify-evenly h-36 items-center mt-16 mb-16 bg-slate-400/20 w-[15rem] shadow-md">
+          <div className="flex flex-col justify-evenly h-36 items-center mt-16 mb-16 bg-green-400/10 w-[15rem] shadow-md">
             <span className="text-[4rem] text-blue-600 pl-6 pr-6">
               {gameWon}
             </span>
@@ -75,42 +62,32 @@ const PlayGame = () => {
             </p>
           </div>
 
-          <div className="flex flex-col justify-evenly h-36 items-center mt-16 mb-16 bg-slate-400/20 w-[15rem] shadow-md">
+          <div className="flex flex-col justify-evenly h-36 items-center mt-16 mb-16 bg-green-400/10 w-[15rem] shadow-md">
             <span className="text-[4rem] text-blue-600 pl-6 pr-6">
               {experiencePoint}
             </span>
             <p className="text-xl font-semibold text-blue-600 pb-4">Points</p>
           </div>
 
-          <div className="flex flex-col justify-evenly h-36 items-center mt-16 mb-16 bg-slate-400/20 w-[15rem] shadow-md">
+          <div className="flex flex-col justify-evenly h-36 items-center mt-16 mb-16 bg-green-400/10 w-[15rem] shadow-md">
             <span className="text-[4rem] text-blue-600 pl-6 pr-6">{coins}</span>
             <p className="text-xl font-semibold text-blue-600 pb-4 ">Coins</p>
           </div>
         </section>
         <div className="flex justify-center">
-          <p className="text-xl font-semibold text-blue-600 pb-4">
-            {message === "game lost" ? (
-              <p className="text-red-500 text-[24px]">
-                Sorry! you lost the game.
-              </p>
-            ) : (
-              <p className="text-blue-600 text-[24px]">
-                Congrulation you won the game.
-              </p>
-            )}
-          </p>
+          <p className="text-xl font-semibold text-blue-600 pb-4">{message}</p>
         </div>
       </div>
       <div className="flex justify-center items-center">
         <button
           onClick={playGame}
-          className=" bg-amber-500 hover:bg-amber-600 pl-8 pr-8  pt-4 pb-4 rounded-md "
+          className=" bg-amber-500/80 hover:bg-amber-500 pl-8 pr-8  pt-4 pb-4 rounded-md shadow-md text-[18px] font-semibold "
         >
           Play Game
         </button>
       </div>
     </div>
   );
-}
+};
 
-export default PlayGame
+export default PlayGame;

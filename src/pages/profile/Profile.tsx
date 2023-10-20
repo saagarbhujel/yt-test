@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import LeftAside from "../../components/LeftAside";
 import NavBar from "../home/NavBar";
+import BioDetials from "./BioDetials";
 
 
 const Profile = () => {
@@ -11,6 +12,7 @@ const Profile = () => {
         </div>
         <div className=" ml-[20vw]">
          <NavBar />
+         <BioDetials />
         </div>
       </section>
 

@@ -1,12 +1,16 @@
 
 import { Link } from "react-router-dom";
-import { useActiveSectionContext } from "../context/active-section-context";
-import { navLinks } from "./constants/Credentials";
-import clsx from "clsx";
-import UseLogout from "../hooks/useLogout";
 
-const LeftAside = () => {
+import { navLinksAdmin } from "../../constants/Credentials";
+import clsx from "clsx";
+import UseLogout from "../../../hooks/useLogout";
+import { useActiveSectionContext } from "../../../context/active-section-context";
+import Search from "../../Search";
+
+
+const AdminLeftAside = () => {
   const logout = UseLogout()
+
 
 
      const { active, setActive, setTimeOfLastClick } = useActiveSectionContext();
@@ -20,15 +24,14 @@ const LeftAside = () => {
     <>
       <section className=" md:w-[20vw] md:h-[100vh] hidden md:flex items-center  flex-col md:border-r   ">
         <div>
-          <div className="mt-8 mb-12 ">
-            <h1 className="text-center  text-[32px] font-bold">
-              {/* <Link to={"/"}>Yarsha Play</Link> */}
-            </h1>
+          <div className="mt-8 mb-12 w-full ">
+            
+             {/* <Search /> */}
           </div>
 
           <div className="     w-[17vw] h-[80vh] rounded-md mt-[8rem] flex flex-col justify-between ">
             <ul className="flex  flex-col justify-center md:items-center items-start ml-[4px] ">
-              {navLinks.map((link, index) => (
+              {navLinksAdmin.map((link , index) => (
                 <Link
                 key={index}
                   className={clsx("w-full  text-gray-400  transition btn", {
@@ -76,4 +79,4 @@ const LeftAside = () => {
 
 
 
-export default LeftAside
+export default AdminLeftAside

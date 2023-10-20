@@ -7,12 +7,14 @@ import Cookies from 'universal-cookie';
 type AuthContextTypes = {
   auth: {
     role?: string;
+    id?: string;
     accessToken?: string;
     refreshToken?: string;
   };
   setAuth: React.Dispatch<
     React.SetStateAction<{
       role?: string | undefined;
+      id?: string;
       accessToken?: string | undefined;
       refreshToken?: string | undefined;
     }>
@@ -48,11 +50,12 @@ useEffect(() => {
   const accessToken = res?.accessToken;
   const refreshToken = res?.refreshToken;
   const name = res?.name;
+  const id= res?.id;
   // console.log(res,"res");
   
 
 
-  setAuth({ role, accessToken, refreshToken,name });
+  setAuth({ role, id,accessToken, refreshToken,name });
 }, [setAuth]); 
 
 

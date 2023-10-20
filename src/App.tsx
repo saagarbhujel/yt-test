@@ -5,7 +5,7 @@ import Login from "./components/login"
 import Signup from "./components/signup"
 import Profile from "./pages/profile/Profile.tsx";
 import RequireAuth from "./components/RequireAuth";
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Home from "./pages/home/Home.tsx";
 import Unauthorized from "./components/Unauthorize";
 import PresistLogin from "./components/PresistLogin";
@@ -13,9 +13,12 @@ import Missing from "./components/Missing.tsx";
 import Stats from "./components/Stats.tsx";
 import Chat from "./pages/chat/Chat.tsx";
 import Game from "./pages/game/Game.tsx";
-import LeftAside from "./components/LeftAside.tsx";
 
+import SearchReasult from "./components/admin/components/searchReasult.tsx";
+import useAuth from "./hooks/useAuth.tsx";
 
+import ChatRoom from "./pages/chat/chatRoom.tsx";
+import ChatPrivate from "./pages/chat/ChatPrivate.tsx";
 
 
 const ROLES = {
@@ -25,56 +28,73 @@ const ROLES = {
 }
 
 function App() {
+  const {auth} = useAuth();
+  const isAuthenticated = auth?.accessToken ? true : false;
+
+
 
   return (
+    <section>
    
-    <Routes>
-      
-      <Route path="/" element={<Layout />}>
-        {/* Public Routes */}
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="admin/login" element={<AdminLogin />} />
-        <Route path="unauthorized" element={<Unauthorized/>} />
 
-        {/* Protected Routes */}
-        <Route element={<PresistLogin/>}>
-        {/* <Route> */}
-                <Route element={<RequireAuth allowedRoles={[ROLES.player, ROLES.admin, ROLES.staff]}/>}>
-                  <Route path="/" element={<Home />} />
-                </Route>
+     
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {/* Public Routes */}
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="admin/login" element={<AdminLogin />} />
+          <Route path="unauthorized" element={<Unauthorized />} />
+         
 
-                 <Route element={<RequireAuth allowedRoles={[ROLES.player]} />}>
-                 {/* <Route> */}
-                  <Route path="profile" element={<Profile />} />
-                  <Route path="stat" element={<Stats />} />
-                  <Route path="chat" element={<Chat />} />
-                  <Route path="game" element={<Game/>} />
+          {/* Protected Routes */}
+          {!isAuthenticated ? (
+            <Route path="/login" element={<Login/>} />
 
-                  
-                </Route>
-                {/* <Route> */}
-                <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />}>
+          ):(
+            <Route path="/home" element={<Home />} />
+
+          )}
+          <Route element={<PresistLogin />}>
+        
+            {/* <Route> */}
+            <Route
+              element={
+                <RequireAuth
+                  allowedRoles={[ROLES.player, ROLES.admin, ROLES.staff]}
+                />
+              }
+            >
+              <Route path="/home" element={<Home />} />
+            </Route>
+
+            <Route element={<RequireAuth allowedRoles={[ROLES.player]} />}>
+              {/* <Route> */}
+              <Route path="chatRoom" element={<ChatRoom />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="stat" element={<Stats />} />
+              <Route path="chat" element={<Chat />} />
+              <Route path="chatPrivate" element={<ChatPrivate />} />
+              <Route path="game" element={<Game />} />
+            </Route>
+            {/* <Route> */}
+            <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />}>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="search" element={<SearchReasult />} />
+             </Route>
+
+            <Route element={<RequireAuth allowedRoles={[ROLES.staff]} />}>
                   <Route path="dashboard" element={<Dashboard />} />
                 </Route>
 
-                {/* <Route element={<RequireAuth allowedRoles={[ROLES.staff]} />}>
-                  <Route path="admin/dashboard" element={<Dashboard />} />
-                </Route> */}
+         
+          </Route>
 
-                {/* <Route
-                  element={<RequireAuth allowedRoles={[ROLES.admin, ROLES.staff]} />}
-                >
-                  <Route path="admin/dashboard" element={<Dashboard />} />
-                </Route> */}
-
+          {/* Catch for all */}
+          <Route path="*" element={<Missing />} />
         </Route>
-        
-        {/* Catch for all */}
-        <Route path="*" element={<Missing/>} />
-      </Route>
-    </Routes>
-   
+      </Routes>
+    </section>
   );
 }
 
