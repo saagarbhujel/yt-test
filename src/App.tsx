@@ -1,11 +1,11 @@
 import Layout from "./Layout";
 import AdminLogin from "./components/admin/adminLogin";
 import Dashboard from "./components/admin/components/dashboard";
-import Login from "./components/login"
-import Signup from "./components/signup"
+import Login from "./components/login";
+import Signup from "./components/signup";
 import Profile from "./pages/profile/Profile.tsx";
 import RequireAuth from "./components/RequireAuth";
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./pages/home/Home.tsx";
 import Unauthorized from "./components/Unauthorize";
 import PresistLogin from "./components/PresistLogin";
@@ -20,24 +20,18 @@ import useAuth from "./hooks/useAuth.tsx";
 import ChatRoom from "./pages/chat/chatRoom.tsx";
 import ChatPrivate from "./pages/chat/ChatPrivate.tsx";
 
-
 const ROLES = {
-'player': 'player',
-'admin': 'admin',
-'staff': 'staff',
-}
+  player: "player",
+  admin: "admin",
+  staff: "staff",
+};
 
 function App() {
-  const {auth} = useAuth();
+  const { auth } = useAuth();
   const isAuthenticated = auth?.accessToken ? true : false;
-
-
 
   return (
     <section>
-   
-
-     
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* Public Routes */}
@@ -45,18 +39,14 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route path="admin/login" element={<AdminLogin />} />
           <Route path="unauthorized" element={<Unauthorized />} />
-         
 
           {/* Protected Routes */}
           {!isAuthenticated ? (
-            <Route path="/login" element={<Login/>} />
-
-          ):(
+            <Route path="/login" element={<Login />} />
+          ) : (
             <Route path="/home" element={<Home />} />
-
           )}
           <Route element={<PresistLogin />}>
-        
             {/* <Route> */}
             <Route
               element={
@@ -81,13 +71,11 @@ function App() {
             <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />}>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="search" element={<SearchReasult />} />
-             </Route>
+            </Route>
 
             <Route element={<RequireAuth allowedRoles={[ROLES.staff]} />}>
-                  <Route path="dashboard" element={<Dashboard />} />
-                </Route>
-
-         
+              <Route path="dashboard" element={<Dashboard />} />
+            </Route>
           </Route>
 
           {/* Catch for all */}
@@ -98,4 +86,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

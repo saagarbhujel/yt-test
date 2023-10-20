@@ -30,14 +30,6 @@ const PresistLogin = () => {
 
     },[])
 
-    // useEffect(()=>{
-    //     console.log(`isLoading: ${isLoading}`);
-    //     console.log(`aT:${JSON.stringify(auth?.accessToken) }`);
-    //     console.log(`rT:${JSON.stringify(auth?.refreshToken) }`);
-    
-    
-    
-    // },[isLoading])
   return (
    <>
    {

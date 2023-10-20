@@ -1,46 +1,27 @@
-
-
-
-import React, { useState, useEffect } from "react";
-import { io } from "socket.io-client";
 import LeftAside from "../../components/LeftAside";
 import NavBar from "../home/NavBar";
-import RoomName from "./RoomName";
-import ChatContainer from "./ChatContainer";
 import ChatContainerPrivate from "./ChatContainerPrivate";
 
-
-
-
 const ChatPrivate = () => {
-  
-
-  
-    
-
   return (
     <>
       <section className="  w-[100vw]  ">
-      <div className="flex">
-        <div className="w-[20vw] h-full  ">
-          {/* <SideNav /> */}
-          <LeftAside />
-        </div>
+        <div className="flex">
+          <div className="w-[20vw] h-full  ">
+            {/* <SideNav /> */}
+            <LeftAside />
+          </div>
 
-        <div className="w-[90vw]   ">
-          <div className="fixed bg-white w-full">
-            <NavBar />
+          <div className="w-[90vw]   ">
+            <div className="fixed bg-white w-full">
+              <NavBar />
+            </div>
+            <div className=" flex justify-center items-center w-full h-[87vh] py-4 mt-4 mb-4 ml-8">
+              <ChatContainerPrivate />
+            </div>
           </div>
-          <div className=" flex justify-center items-center w-full h-[87vh] py-4 mt-4 mb-4 ml-8">
-          
-        
-             <ChatContainerPrivate />
-      
-          </div>
-        
         </div>
-      </div>
-    </section>
+      </section>
     </>
   );
 };

@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { useActiveSectionContext } from "../context/active-section-context";
 import { navLinks } from "./constants/Credentials";
@@ -6,15 +5,13 @@ import clsx from "clsx";
 import UseLogout from "../hooks/useLogout";
 
 const LeftAside = () => {
-  const logout = UseLogout()
+  const logout = UseLogout();
 
+  const { active, setActive, setTimeOfLastClick } = useActiveSectionContext();
 
-     const { active, setActive, setTimeOfLastClick } = useActiveSectionContext();
-
-
-     const handleLogout = () => {
-        logout()
-     }
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <>
@@ -30,7 +27,7 @@ const LeftAside = () => {
             <ul className="flex  flex-col justify-center md:items-center items-start ml-[4px] ">
               {navLinks.map((link, index) => (
                 <Link
-                key={index}
+                  key={index}
                   className={clsx("w-full  text-gray-400  transition btn", {
                     "text-black": active === link.title,
                   })}
@@ -74,6 +71,4 @@ const LeftAside = () => {
   );
 };
 
-
-
-export default LeftAside
+export default LeftAside;

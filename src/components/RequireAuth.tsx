@@ -23,10 +23,6 @@ const role = decoded?.role
 
 
   const location = useLocation();
-  // const decoded:AuthToken | undefined = auth.accessToken ? jwt_decode(auth.accessToken) : undefined
-  // console.log(decoded?.role)
-  // const role = decoded?.role ? decoded?.role : undefined
-  // console.log(role)
 
   return (
       role && allowedRoles?.includes(role) ?
